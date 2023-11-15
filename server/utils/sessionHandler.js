@@ -5,7 +5,6 @@ import SessionModel from "../models/SessionModels.js";
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
 const storeSession = async (session) => {
-
   const [result , created ] = await SessionModel.findOrCreate({
         where: { id: session.id },
         defaults: {
@@ -28,26 +27,12 @@ const storeSession = async (session) => {
           
          )
       }
-  
-
-  // await SessionModel.findOneAndUpdate(
-  //   { id: session.id },
-  //   {
-  //     content: cryption.encrypt(JSON.stringify(session)),
-  //     shop: session.shop,
-  //   },
-  //   { upsert: true }
-  // );
-
   return true;
 };
 
 const loadSession = async (id) => {
 
   const sessionResult = await SessionModel.findOne({ where : {id :  id}} )
-  const sessionRes = await SessionModel.findAll({ where : {id :  id}} )
-
-  console.log(sessionRes)
 
   if (sessionResult === null) {
     return undefined;

@@ -9,6 +9,7 @@ function useFetch() {
 
   return async (uri, options) => {
 
+    console.log(`useEetch line 12 ${JSON.stringify(options)}`)
 
     const response = await fetchFunction(
       uri.startsWith("/")
@@ -18,8 +19,6 @@ function useFetch() {
     );
     if (
       response.headers.get("X-Shopify-API-Request-Failure-Reauthorize") === "1"
-           
-
     ) {
       console.log("hii response")
       const authUrlHeader = response.headers.get(

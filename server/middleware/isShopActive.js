@@ -31,9 +31,7 @@ const isShopActive = async (req, res, next) => {
           limit : 1
         }
       )
-      // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
     }
-    
     res.redirect(`/auth?shop=${shop}&host=${host}`);
   } else {
     next();

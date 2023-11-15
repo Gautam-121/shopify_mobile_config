@@ -8,9 +8,11 @@ import CreateNotification from './pages/CreateNotification'
 import SettingsPage from './pages/SettingsPage'
 import Templates from "./pages/Templates";
 // import Segment from "./pages/Index"
+import Banner from "./pages/Banner";
+import GetBanners from "./pages/GetBanners";
 
 const routes = {
-  "/": () => <GetData/>,
+  "/": () => <GetBanners/>,
   "/exitframe": () => <ExitFrame />,
   "/exitframe/:shop": ({ shop }) => <ExitFrame shop={shop} />,
   //Debug Cards

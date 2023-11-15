@@ -24,11 +24,7 @@ const appUninstallHandler = async (
       limit : 1
     }
   )
-  // await StoreModel.findOneAndUpdate({ shop }, { isActive: false });
-
   await SessionModel.destroy({where : {shop : shop}})
-
-  // await SessionModel.deleteMany({ shop });
 };
 
 export default appUninstallHandler;

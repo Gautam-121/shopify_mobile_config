@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    flex-direction: column  ;
+    justify-content: center;
+    padding: 10px;
+    width: 20%;
+    gap: 1rem;
+}
+.container label{
+    margin-bottom: -13px;
+}
+.container button{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    height: 2rem;
+    border-radius: 10px;
+}

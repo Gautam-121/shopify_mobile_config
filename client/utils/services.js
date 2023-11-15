@@ -22,8 +22,8 @@ import useFetch from "../hooks/useFetch";
         let dataFromApi = result.segments;
         setData(dataFromApi);
       }
-      else if('products' in result){
-        let dataFromApi = result.products;
+      else if('banner' in result){
+        let dataFromApi = result.banner;
         setData(dataFromApi);
       }
     };

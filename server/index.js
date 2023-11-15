@@ -5,7 +5,7 @@ import { resolve } from "path";
 import shopify from "./utils/shopifyConfig.js";
 import cors from "cors"
 import sequelize from "./config/database.js"
-
+import multer from "multer"
 import sessionHandler from "./utils/sessionHandler.js";
 import csp from "./middleware/csp.js";
 import setupCheck from "./utils/setupCheck.js";
@@ -21,13 +21,13 @@ import verifyProxy from "./middleware/verifyProxy.js";
 import verifyRequest from "./middleware/verifyRequest.js";
 import proxyRouter from "./routes/app_proxy/index.js";
 import router from "./routes/index.js";
+import bannerRoutes from "./routes/bannerRoutes.js"
 import webhookRegistrar from "./webhooks/index.js";
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
 const PORT = parseInt(process.env.PORT, 10) || 8081;
 const isDev = process.env.NODE_ENV === "dev";
-
 
 sequelize.sync().then(() => {
    console.log('Database synced');
@@ -40,11 +40,12 @@ webhookRegistrar();
 
 const app = express();
 app.use(cors())
+app.use(multer().any())
 
 const createServer = async (root = process.cwd()) => {
-  app.disable("x-powered-by");
+app.disable("x-powered-by");
 
-  applyAuthMiddleware(app);
+applyAuthMiddleware(app);
 
   // Incoming webhook requests
   app.post(
@@ -97,7 +98,7 @@ const createServer = async (root = process.cwd()) => {
   app.use(csp);
   app.use(isShopActive);
   // If you're making changes to any of the routes, please make sure to add them in `./client/vite.config.cjs` or it'll not work.
-  app.use("/apps", verifyRequest , router); //Verify user route requests
+  app.use("/apps" , bannerRoutes); //Verify user route requests using middleware verifyRequest
   app.use("/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
 
   app.post("/gdpr/:topic", verifyHmac, async (req, res) => {

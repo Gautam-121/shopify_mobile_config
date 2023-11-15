@@ -27,10 +27,6 @@ const verifyRequest = async (req, res, next) => {
       req.query.shop = session?.shop
     }
 
-    console.log(session, "hii from session");
-
-    console.log(`exired token is ${new Date(session?.expires)}`)
-
     if (new Date(session?.expires) > new Date()) {
 
       const client = new shopify.clients.Graphql({ session });
@@ -40,6 +36,8 @@ const verifyRequest = async (req, res, next) => {
         "Content-Security-Policy",
         `frame-ancestors https://${session.shop} https://admin.shopify.com;`
       );
+
+      req.query.accessToken = session?.accessToken
 
       return next();
     }

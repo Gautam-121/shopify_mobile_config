@@ -16,10 +16,6 @@ const SessionModel = sequelize.define('session', {
     type : DataTypes.TEXT,
     allowNull:false
   },
-  serverKey:{ // Server Key of Store User
-    type : DataTypes.TEXT,
-    defaultValue:null
-  }
 });
 
 export default SessionModel
